@@ -1,11 +1,14 @@
-require_relative "console_representation"
+require_relative "maze"
 
-describe "generating a console-representable maze" do
+describe "A maze" do
+  it "knows that a room is on the west edge" do
+    maze = Maze.of_size(width: 1)
+    expect(maze.on_edge?(maze.rooms.first, :west)).to eq true
+  end
 
-  it "handles a 1x1 maze" do
-    maze = double
-    output = ConsoleRepresentation.for(maze)
-    expect(output).to eq("OOO\nO O\nOOO")
+  it "knows that a room is not on the west edge" do
+    maze = Maze.of_size(width: 2)
+    expect(maze.on_edge?(maze.rooms.last, :west)).to eq false
   end
 
 end

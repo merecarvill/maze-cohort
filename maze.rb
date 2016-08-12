@@ -1,19 +1,19 @@
-require_relative "console_representation"
+require_relative "room"
 
-maze = <<END
-inner north
-.OO
-.
+class Maze
+  def initialize(width:)
+    @width = width
+  end
 
-inner east
-. O
-. O
+  def self.of_size(width:)
+    new(width: width)
+  end
 
-two inner walls
-.OO
-.
-. O
-. O
-END
+  def rooms
+    @rooms ||= (1..@width).map { Room.new }
+  end
 
-puts ConsoleRepresentation.for(nil)
+  def on_edge?(room, direction)
+    rooms.first == room
+  end
+end
